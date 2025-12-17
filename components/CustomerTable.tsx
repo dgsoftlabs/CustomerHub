@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Plus, Edit, Trash2, Search, ChevronLeft, ChevronRight, Mail } from "lucide-react";
+import { Plus, Edit, Trash2, Search, ChevronLeft, ChevronRight, Mail, User, AtSign, Phone, Calendar, Hash, Settings } from "lucide-react";
 import CustomerDialog from "./CustomerDialog";
 import DeleteConfirmation from "./DeleteConfirmation";
 import BulkMessageDialog from "./BulkMessageDialog";
@@ -142,22 +142,40 @@ export default function CustomerTable({ customers }: CustomerTableProps) {
                   />
                 </th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider bg-gray-50 dark:bg-gray-800">
-                  ID
+                  <div className="flex items-center gap-2">
+                    <Hash className="h-4 w-4" />
+                    ID
+                  </div>
                 </th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider bg-gray-50 dark:bg-gray-800">
-                  Name
+                  <div className="flex items-center gap-2">
+                    <User className="h-4 w-4" />
+                    Name
+                  </div>
                 </th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider bg-gray-50 dark:bg-gray-800">
-                  Email
+                  <div className="flex items-center gap-2">
+                    <AtSign className="h-4 w-4" />
+                    Email
+                  </div>
                 </th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider bg-gray-50 dark:bg-gray-800">
-                  Phone
+                  <div className="flex items-center gap-2">
+                    <Phone className="h-4 w-4" />
+                    Phone
+                  </div>
                 </th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider bg-gray-50 dark:bg-gray-800">
-                  Created At
+                  <div className="flex items-center gap-2">
+                    <Calendar className="h-4 w-4" />
+                    Created At
+                  </div>
                 </th>
                 <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider bg-gray-50 dark:bg-gray-800">
-                  Actions
+                  <div className="flex items-center justify-end gap-2">
+                    <Settings className="h-4 w-4" />
+                    Actions
+                  </div>
                 </th>
               </tr>
             </thead>
@@ -183,16 +201,30 @@ export default function CustomerTable({ customers }: CustomerTableProps) {
                     {customer.id}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
-                    {customer.name}
+                    <div className="flex items-center gap-2">
+                      <div className="flex-shrink-0 h-8 w-8 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+                        <User className="h-4 w-4 text-blue-600 dark:text-blue-300" />
+                      </div>
+                      {customer.name}
+                    </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
-                    {customer.email}
+                    <div className="flex items-center gap-2">
+                      <AtSign className="h-3.5 w-3.5 text-gray-400" />
+                      {customer.email}
+                    </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
-                    {customer.phone}
+                    <div className="flex items-center gap-2">
+                      <Phone className="h-3.5 w-3.5 text-gray-400" />
+                      {customer.phone || '-'}
+                    </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
-                    {customer.createdAt ? new Date(customer.createdAt).toLocaleDateString() : 'N/A'}
+                    <div className="flex items-center gap-2">
+                      <Calendar className="h-3.5 w-3.5 text-gray-400" />
+                      {customer.createdAt ? new Date(customer.createdAt).toLocaleDateString() : 'N/A'}
+                    </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <div className="flex justify-end gap-2">
