@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Plus, Edit, Trash2, Search, ChevronLeft, ChevronRight } from "lucide-react";
+import { Plus, Edit, Trash2, Search, ChevronLeft, ChevronRight, Mail } from "lucide-react";
 import CustomerDialog from "./CustomerDialog";
 import DeleteConfirmation from "./DeleteConfirmation";
+import BulkMessageDialog from "./BulkMessageDialog";
 import type { Customer } from "@/db/schema";
 
 interface CustomerTableProps {
@@ -17,6 +18,8 @@ export default function CustomerTable({ customers }: CustomerTableProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(25);
+  const [selectedCustomers, setSelectedCustomers] = useState<Set<number>>(new Set());
+  const [isBulkMessageOpen, setIsBulkMessageOpen] = useState(false);
 
   const filteredCustomers = useMemo(() => {
     if (!searchTerm) return customers;
@@ -48,6 +51,39 @@ export default function CustomerTable({ customers }: CustomerTableProps) {
     setCurrentPage(1);
   };
 
+  const toggleSelectCustomer = (customerId: number) => {
+    const newSelected = new Set(selectedCustomers);
+    if (newSelected.has(customerId)) {
+      newSelected.delete(customerId);
+    } else {
+      newSelected.add(customerId);
+    }
+    setSelectedCustomers(newSelected);
+  };
+
+  const toggleSelectAll = () => {
+    if (selectedCustomers.size === paginatedCustomers.length) {
+      setSelectedCustomers(new Set());
+    } else {
+      setSelectedCustomers(new Set(paginatedCustomers.map(c => c.id)));
+    }
+  };
+
+  const handleBulkMessageClick = () => {
+    if (selectedCustomers.size === 0) {
+      alert("Please select at least one customer to send a message");
+      return;
+    }
+    setIsBulkMessageOpen(true);
+  };
+
+  const handleBulkMessageClose = () => {
+    setIsBulkMessageOpen(false);
+    setSelectedCustomers(new Set());
+  };
+
+  const selectedCustomerObjects = customers.filter(c => selectedCustomers.has(c.id));
+
   return (
     <>
       <div className="w-full">
@@ -70,6 +106,18 @@ export default function CustomerTable({ customers }: CustomerTableProps) {
                 className="w-full pl-10 pr-4 py-2 border rounded text-black dark:text-white dark:bg-gray-700 dark:border-gray-600"
               />
             </div>
+            
+            {selectedCustomers.size > 0 && (
+              <button
+                onClick={handleBulkMessageClick}
+                className="flex items-center justify-center gap-2 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 whitespace-nowrap"
+              >
+                <Mail className="h-4 w-4" />
+                <span className="hidden sm:inline">Send to {selectedCustomers.size}</span>
+                <span className="sm:hidden">Send ({selectedCustomers.size})</span>
+              </button>
+            )}
+            
             <button
               onClick={() => setIsAddDialogOpen(true)}
               className="flex items-center justify-center gap-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 whitespace-nowrap"
@@ -85,6 +133,14 @@ export default function CustomerTable({ customers }: CustomerTableProps) {
           <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
             <thead className="bg-gray-50 dark:bg-gray-800 sticky top-0 z-10">
               <tr>
+                <th scope="col" className="px-6 py-3 text-left bg-gray-50 dark:bg-gray-800">
+                  <input
+                    type="checkbox"
+                    checked={paginatedCustomers.length > 0 && selectedCustomers.size === paginatedCustomers.length}
+                    onChange={toggleSelectAll}
+                    className="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+                  />
+                </th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider bg-gray-50 dark:bg-gray-800">
                   ID
                 </th>
@@ -108,13 +164,21 @@ export default function CustomerTable({ customers }: CustomerTableProps) {
             <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
               {paginatedCustomers.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="px-6 py-12 text-center text-gray-500 dark:text-gray-400">
+                  <td colSpan={7} className="px-6 py-12 text-center text-gray-500 dark:text-gray-400">
                     {searchTerm ? "No customers found matching your search." : "No customers yet. Add one to get started!"}
                   </td>
                 </tr>
               ) : (
                 paginatedCustomers.map((customer) => (
                 <tr key={customer.id} className="hover:bg-gray-50 dark:hover:bg-gray-800">
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <input
+                      type="checkbox"
+                      checked={selectedCustomers.has(customer.id)}
+                      onChange={() => toggleSelectCustomer(customer.id)}
+                      className="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+                    />
+                  </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
                     {customer.id}
                   </td>
@@ -249,6 +313,12 @@ export default function CustomerTable({ customers }: CustomerTableProps) {
           customerName={deletingCustomer.name}
         />
       )}
+
+      <BulkMessageDialog
+        isOpen={isBulkMessageOpen}
+        onClose={handleBulkMessageClose}
+        selectedCustomers={selectedCustomerObjects}
+      />
     </>
   );
 }
