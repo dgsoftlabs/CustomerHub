@@ -7,10 +7,10 @@
 ## 📸 Screenshots
 
 ### Desktop View
-![CustomerHub Desktop](screenshots/CustomerHub1.png)
+![CustomerHub Desktop](screenshots/CutomerHub1.png)
 
 ### Mobile View
-![CustomerHub Mobile](screenshots/CustomerHubMob1.png)
+![CustomerHub Mobile](screenshots/CutomerHubMob1.png)
 
 ## 🎯 Purpose
 
