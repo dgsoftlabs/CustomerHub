@@ -25,58 +25,58 @@ export default async function Dashboard() {
     .slice(0, 5);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       <div>
-        <h1 className="text-4xl font-bold mb-2">Dashboard</h1>
-        <p className="text-gray-600 dark:text-gray-400">Welcome to CustomerHub</p>
+        <h1 className="text-3xl sm:text-4xl font-bold mb-2">Dashboard</h1>
+        <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">Welcome to CustomerHub</p>
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg border border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Customers</p>
-              <p className="text-3xl font-bold text-gray-900 dark:text-gray-100 mt-2">{totalCustomers}</p>
+              <p className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-400">Total Customers</p>
+              <p className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 mt-1 sm:mt-2">{totalCustomers}</p>
             </div>
-            <div className="p-3 bg-blue-100 dark:bg-blue-900 rounded-full">
-              <Users className="h-6 w-6 text-blue-600 dark:text-blue-300" />
+            <div className="p-2 sm:p-3 bg-blue-100 dark:bg-blue-900 rounded-full">
+              <Users className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600 dark:text-blue-300" />
             </div>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+        <div className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg border border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">New This Month</p>
-              <p className="text-3xl font-bold text-gray-900 dark:text-gray-100 mt-2">{customersThisMonth}</p>
+              <p className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-400">New This Month</p>
+              <p className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 mt-1 sm:mt-2">{customersThisMonth}</p>
             </div>
-            <div className="p-3 bg-green-100 dark:bg-green-900 rounded-full">
-              <TrendingUp className="h-6 w-6 text-green-600 dark:text-green-300" />
+            <div className="p-2 sm:p-3 bg-green-100 dark:bg-green-900 rounded-full">
+              <TrendingUp className="h-5 w-5 sm:h-6 sm:w-6 text-green-600 dark:text-green-300" />
             </div>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+        <div className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg border border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Active Today</p>
-              <p className="text-3xl font-bold text-gray-900 dark:text-gray-100 mt-2">42</p>
+              <p className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-400">Active Today</p>
+              <p className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 mt-1 sm:mt-2">42</p>
             </div>
-            <div className="p-3 bg-purple-100 dark:bg-purple-900 rounded-full">
-              <Activity className="h-6 w-6 text-purple-600 dark:text-purple-300" />
+            <div className="p-2 sm:p-3 bg-purple-100 dark:bg-purple-900 rounded-full">
+              <Activity className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600 dark:text-purple-300" />
             </div>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+        <div className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg border border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Growth Rate</p>
-              <p className="text-3xl font-bold text-gray-900 dark:text-gray-100 mt-2">+12%</p>
+              <p className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-400">Growth Rate</p>
+              <p className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 mt-1 sm:mt-2">+12%</p>
             </div>
-            <div className="p-3 bg-orange-100 dark:bg-orange-900 rounded-full">
-              <Calendar className="h-6 w-6 text-orange-600 dark:text-orange-300" />
+            <div className="p-2 sm:p-3 bg-orange-100 dark:bg-orange-900 rounded-full">
+              <Calendar className="h-5 w-5 sm:h-6 sm:w-6 text-orange-600 dark:text-orange-300" />
             </div>
           </div>
         </div>
@@ -84,23 +84,23 @@ export default async function Dashboard() {
 
       {/* Recent Customers */}
       <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-        <div className="p-6 border-b dark:border-gray-700">
-          <h2 className="text-xl font-semibold">Recent Customers</h2>
+        <div className="p-4 sm:p-6 border-b dark:border-gray-700">
+          <h2 className="text-lg sm:text-xl font-semibold">Recent Customers</h2>
         </div>
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
             <thead className="bg-gray-50 dark:bg-gray-900">
               <tr>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                <th scope="col" className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                   Name
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                <th scope="col" className="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                   Email
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                <th scope="col" className="hidden md:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                   Phone
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                <th scope="col" className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                   Added
                 </th>
               </tr>
@@ -108,16 +108,16 @@ export default async function Dashboard() {
             <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
               {recentCustomers.map((customer) => (
                 <tr key={customer.id} className="hover:bg-gray-50 dark:hover:bg-gray-800">
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
+                  <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
                     {customer.name}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                  <td className="hidden sm:table-cell px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                     {customer.email}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                  <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                     {customer.phone}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                  <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                     {customer.createdAt ? new Date(customer.createdAt).toLocaleDateString() : 'N/A'}
                   </td>
                 </tr>

@@ -51,31 +51,32 @@ export default function CustomerTable({ customers }: CustomerTableProps) {
   return (
     <>
       <div className="w-full">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
-          <h2 className="text-2xl font-semibold">
-            Customer List ({filteredCustomers.length}{searchTerm && ` of ${customers.length}`})
+        <div className="flex flex-col gap-3 mb-4">
+          <h2 className="text-xl sm:text-2xl font-semibold">
+            Customers ({filteredCustomers.length}{searchTerm && ` of ${customers.length}`})
           </h2>
           
-          <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
-            <div className="relative flex-1 sm:flex-initial">
+          <div className="flex flex-col sm:flex-row gap-2">
+            <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               <input
                 type="text"
-                placeholder="Search customers..."
+                placeholder="Search..."
                 value={searchTerm}
                 onChange={(e) => {
                   setSearchTerm(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full sm:w-64 pl-10 pr-4 py-2 border rounded text-black dark:text-white dark:bg-gray-700 dark:border-gray-600"
+                className="w-full pl-10 pr-4 py-2 border rounded text-black dark:text-white dark:bg-gray-700 dark:border-gray-600"
               />
             </div>
             <button
               onClick={() => setIsAddDialogOpen(true)}
-              className="flex items-center justify-center gap-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              className="flex items-center justify-center gap-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 whitespace-nowrap"
             >
               <Plus className="h-4 w-4" />
-              Add Customer
+              <span className="hidden sm:inline">Add Customer</span>
+              <span className="sm:hidden">Add</span>
             </button>
           </div>
         </div>
@@ -156,54 +157,56 @@ export default function CustomerTable({ customers }: CustomerTableProps) {
 
         {/* Pagination Controls */}
         {filteredCustomers.length > 0 && (
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-4">
-            <div className="flex items-center gap-2">
-              <label htmlFor="pageSize" className="text-sm text-gray-600 dark:text-gray-400">
-                Rows per page:
-              </label>
-              <select
-                id="pageSize"
-                value={pageSize}
-                onChange={(e) => handlePageSizeChange(Number(e.target.value))}
-                className="border rounded px-2 py-1 text-sm dark:bg-gray-700 dark:border-gray-600"
-              >
-                <option value={10}>10</option>
-                <option value={25}>25</option>
-                <option value={50}>50</option>
-                <option value={100}>100</option>
-              </select>
-              <span className="text-sm text-gray-600 dark:text-gray-400">
-                Showing {((currentPage - 1) * pageSize) + 1} to {Math.min(currentPage * pageSize, filteredCustomers.length)} of {filteredCustomers.length}
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mt-4">
+            <div className="flex flex-col sm:flex-row items-center gap-2 w-full sm:w-auto">
+              <div className="flex items-center gap-2">
+                <label htmlFor="pageSize" className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
+                  Rows:
+                </label>
+                <select
+                  id="pageSize"
+                  value={pageSize}
+                  onChange={(e) => handlePageSizeChange(Number(e.target.value))}
+                  className="border rounded px-2 py-1 text-xs sm:text-sm dark:bg-gray-700 dark:border-gray-600"
+                >
+                  <option value={10}>10</option>
+                  <option value={25}>25</option>
+                  <option value={50}>50</option>
+                  <option value={100}>100</option>
+                </select>
+              </div>
+              <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
+                {((currentPage - 1) * pageSize) + 1}-{Math.min(currentPage * pageSize, filteredCustomers.length)} of {filteredCustomers.length}
               </span>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 sm:gap-2">
               <button
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1}
-                className="p-2 border rounded hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="p-1.5 sm:p-2 border rounded hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <ChevronLeft className="h-4 w-4" />
+                <ChevronLeft className="h-3 w-3 sm:h-4 sm:w-4" />
               </button>
               
               <div className="flex gap-1">
-                {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                {Array.from({ length: Math.min(totalPages <= 3 ? totalPages : 3, totalPages) }, (_, i) => {
                   let pageNumber;
-                  if (totalPages <= 5) {
+                  if (totalPages <= 3) {
                     pageNumber = i + 1;
-                  } else if (currentPage <= 3) {
+                  } else if (currentPage <= 2) {
                     pageNumber = i + 1;
-                  } else if (currentPage >= totalPages - 2) {
-                    pageNumber = totalPages - 4 + i;
+                  } else if (currentPage >= totalPages - 1) {
+                    pageNumber = totalPages - 2 + i;
                   } else {
-                    pageNumber = currentPage - 2 + i;
+                    pageNumber = currentPage - 1 + i;
                   }
                   
                   return (
                     <button
                       key={pageNumber}
                       onClick={() => handlePageChange(pageNumber)}
-                      className={`px-3 py-1 border rounded text-sm ${
+                      className={`px-2 sm:px-3 py-1 border rounded text-xs sm:text-sm ${
                         currentPage === pageNumber
                           ? 'bg-blue-500 text-white border-blue-500'
                           : 'hover:bg-gray-100 dark:hover:bg-gray-700'
@@ -218,9 +221,9 @@ export default function CustomerTable({ customers }: CustomerTableProps) {
               <button
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className="p-2 border rounded hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="p-1.5 sm:p-2 border rounded hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <ChevronRight className="h-4 w-4" />
+                <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4" />
               </button>
             </div>
           </div>

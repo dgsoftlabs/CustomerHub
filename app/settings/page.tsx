@@ -18,10 +18,10 @@ export default function Settings() {
   };
 
   return (
-    <div className="space-y-8 max-w-4xl">
+    <div className="space-y-6 sm:space-y-8 max-w-4xl">
       <div>
-        <h1 className="text-4xl font-bold mb-2">Settings</h1>
-        <p className="text-gray-600 dark:text-gray-400">Manage your application preferences</p>
+        <h1 className="text-3xl sm:text-4xl font-bold mb-2">Settings</h1>
+        <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">Manage your application preferences</p>
       </div>
 
       {/* General Settings */}
