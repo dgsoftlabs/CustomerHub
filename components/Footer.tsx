@@ -1,4 +1,5 @@
 import { Heart, Github, Mail } from "lucide-react";
+import Link from "next/link";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -20,19 +21,19 @@ export default function Footer() {
             <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Quick Links</h3>
             <ul className="space-y-1 text-sm">
               <li>
-                <a href="/dashboard" className="text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400">
+                <Link href="/dashboard" className="text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400">
                   Dashboard
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/" className="text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400">
+                <Link href="/" className="text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400">
                   Customers
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/settings" className="text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400">
+                <Link href="/settings" className="text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400">
                   Settings
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
