@@ -197,10 +197,29 @@ npm run dev          # Start development server
 npm run build        # Build for production
 npm run start        # Start production server
 npm run lint         # Run ESLint
+npm test             # Run tests with Jest
+npm run test:watch   # Run tests in watch mode
+npm run test:coverage # Run tests with coverage report
 npm run db:generate  # Generate Drizzle migrations
 npm run db:push      # Apply schema changes
 npm run db:seed      # Seed database with test data
 ```
+
+## 🧪 Testing
+
+The project includes 25 comprehensive tests covering:
+- **Component tests** - BulkMessageDialog, Header, Footer
+- **SMTP library tests** - Email sending functionality
+- **Integration tests** - Full user workflows
+
+Run tests:
+```bash
+npm test              # Run all tests
+npm run test:watch    # Watch mode for development
+npm run test:coverage # Generate coverage report
+```
+
+All tests are automatically run in the CI/CD pipeline before deployment.
 
 ## � Deployment
 
