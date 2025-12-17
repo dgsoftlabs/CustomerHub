@@ -1,4 +1,1 @@
 # CustomerHub
-
-Customer Management System
-
