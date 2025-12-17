@@ -2,6 +2,9 @@ import { db } from "@/db";
 import { customers } from "@/db/schema";
 import { Users, TrendingUp, Calendar, Activity, User, AtSign, Phone } from "lucide-react";
 
+// Force dynamic rendering to avoid build-time database queries
+export const dynamic = 'force-dynamic';
+
 export default async function Dashboard() {
   const allCustomers = await db.select().from(customers);
   
