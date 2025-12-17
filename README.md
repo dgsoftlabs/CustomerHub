@@ -4,6 +4,14 @@
 
 **CustomerHub** is a modern customer management system that helps businesses organize and manage their customer database. Built with Next.js and TypeScript, it provides a fast, intuitive interface for tracking customer information, contacts, and interactions.
 
+## 📸 Screenshots
+
+### Desktop View
+![CustomerHub Desktop](screenshots/CustomerHub1.png)
+
+### Mobile View
+![CustomerHub Mobile](screenshots/CustomerHubMob1.png)
+
 ## 🎯 Purpose
 
 This application serves as a centralized platform for:
