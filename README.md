@@ -202,7 +202,34 @@ npm run db:push      # Apply schema changes
 npm run db:seed      # Seed database with test data
 ```
 
-## 📖 Usage
+## � Deployment
+
+### AWS Cloud Deployment
+
+This project includes automated CI/CD pipeline for AWS deployment using GitHub Actions.
+
+**Supported deployment targets:**
+- AWS S3 + CloudFront (static hosting)
+- AWS Amplify (full-stack hosting)
+- AWS ECS (Docker containers)
+
+**Deployment is disabled by default.** See [AWS_DEPLOYMENT.md](AWS_DEPLOYMENT.md) for detailed setup instructions.
+
+**Quick start:**
+1. Configure AWS credentials in GitHub Secrets
+2. Choose deployment target (S3/Amplify/ECS)
+3. Enable deployment:
+   - Manual: Go to Actions → Run workflow → Enable deployment
+   - Auto: Set `AUTO_DEPLOY: 'true'` in workflow file
+
+### Other Deployment Options
+
+- **[Vercel](https://vercel.com/)** - Recommended for Next.js (zero config)
+- **[Railway](https://railway.app/)** - Simple containerized deployment
+- **[Netlify](https://www.netlify.com/)** - JAMstack hosting
+- **Docker** - Use included Dockerfile for any container platform
+
+## �📖 Usage
 
 ### Logging In
 1. Navigate to `http://localhost:3000`

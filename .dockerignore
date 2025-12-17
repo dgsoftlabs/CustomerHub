@@ -1,0 +1,7 @@
+# AWS Deployment - Ignore build artifacts
+.next/
+out/
+
+# Docker
+Dockerfile.dev
+docker-compose.override.yml
