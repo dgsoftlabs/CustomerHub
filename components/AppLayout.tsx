@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import Footer from "./Footer";
@@ -8,6 +9,12 @@ import ProtectedRoute from "./ProtectedRoute";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const pathname = usePathname();
+  
+  // Don't wrap login page with protected layout
+  if (pathname === "/login") {
+    return <>{children}</>;
+  }
 
   return (
     <ProtectedRoute>

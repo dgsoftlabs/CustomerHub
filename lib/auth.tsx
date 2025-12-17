@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState } from "react";
 import { useRouter } from "next/navigation";
 
 interface AuthContextType {
@@ -12,14 +12,13 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    if (typeof window !== "undefined") {
+      return sessionStorage.getItem("isAuthenticated") === "true";
+    }
+    return false;
+  });
   const router = useRouter();
-
-  useEffect(() => {
-    // Check if user is already logged in
-    const authStatus = sessionStorage.getItem("isAuthenticated");
-    setIsAuthenticated(authStatus === "true");
-  }, []);
 
   const login = (username: string, password: string) => {
     // Simple authentication - admin/admin
