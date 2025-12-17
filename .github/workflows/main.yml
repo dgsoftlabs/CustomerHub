@@ -17,8 +17,6 @@ env:
   NODE_VERSION: '20'
   # AWS Configuration
   AWS_REGION: 'us-east-1'
-  # Set to 'true' to enable automatic deployment on push (default: false)
-  AUTO_DEPLOY: 'false'
 
 jobs:
   build:
@@ -63,11 +61,10 @@ jobs:
     runs-on: ubuntu-latest
     # Deploy only if:
     # 1. Manual workflow with enable_deploy=true OR
-    # 2. Push to main/master AND AUTO_DEPLOY is true
+    # 2. Auto-deploy is enabled (set AUTO_DEPLOY variable in repo settings to 'true')
     if: |
       (github.event_name == 'workflow_dispatch' && github.event.inputs.enable_deploy == 'true') ||
-      (github.event_name == 'push' && github.ref == 'refs/heads/main' && env.AUTO_DEPLOY == 'true') ||
-      (github.event_name == 'push' && github.ref == 'refs/heads/master' && env.AUTO_DEPLOY == 'true')
+      (github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') && vars.AUTO_DEPLOY == 'true')
     
     # Uncomment for specific environment
     # environment:
